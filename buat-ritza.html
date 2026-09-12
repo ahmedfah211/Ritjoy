@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buat Ritza</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #EFE6CE;
+    --paper-line: #DED0AD;
+    --ink: #2B2A26;
+    --denim: #35526B;
+    --maroon: #7A2E2E;
+    --muted: #7A7364;
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background:
+      repeating-linear-gradient(
+        var(--paper),
+        var(--paper) 34px,
+        var(--paper-line) 35px
+      );
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+  }
+  .handwrite{ font-family: 'Kalam', cursive; }
+  a{ color:inherit; }
+  .wrap{ max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+  /* margin rule like a school notebook */
+  body::before{
+    content:"";
+    position: fixed; top:0; bottom:0; left: 56px;
+    width: 2px; background: var(--maroon); opacity: 0.35;
+    z-index: 0;
+  }
+  @media (max-width: 620px){ body::before{ display:none; } }
+
+  header{
+    padding: 60px 0 20px; text-align:center; position:relative; z-index:1;
+  }
+  .patch{
+    display:inline-block; border: 2px solid var(--denim);
+    color: var(--denim); font-weight: 600; font-size: 13px;
+    padding: 5px 14px; border-radius: 30px; letter-spacing: 0.03em;
+    transform: rotate(-2deg);
+    margin-bottom: 18px;
+  }
+  h1{
+    font-family:'Kalam'; font-weight:700; font-size: clamp(38px, 7vw, 62px);
+    line-height: 1.1;
+  }
+  header p{ color: var(--muted); margin-top: 14px; font-size: 16px; }
+
+  section{ padding: 46px 0; position: relative; z-index:1; }
+
+  /* countdown */
+  .countdown-box{
+    background: #fff9e8;
+    border: 2px solid var(--ink);
+    box-shadow: 6px 6px 0 var(--denim);
+    padding: 28px 24px;
+    text-align:center;
+    transform: rotate(-1deg);
+  }
+  .countdown-box .label{ font-size:14px; color: var(--muted); margin-bottom:10px; }
+  .countdown-nums{
+    display:flex; justify-content:center; gap: 18px; flex-wrap:wrap;
+  }
+  .cnum{ min-width: 64px; }
+  .cnum .n{ font-family:'Kalam'; font-weight:700; font-size: 40px; color: var(--maroon); }
+  .cnum .u{ font-size: 12px; color: var(--muted); text-transform:uppercase; letter-spacing:0.05em; }
+
+  /* notes taped */
+  .note-grid{
+    display:grid; gap: 26px;
+  }
+  .note{
+    background: #fffef4;
+    border: 1px solid #cfc196;
+    padding: 22px 24px;
+    position: relative;
+    box-shadow: 3px 4px 0 rgba(0,0,0,0.08);
+  }
+  .note:nth-child(odd){ transform: rotate(-1deg); }
+  .note:nth-child(even){ transform: rotate(1deg); }
+  .note::before{
+    content:""; position:absolute; top:-10px; left: 24px;
+    width: 46px; height: 18px;
+    background: rgba(122,46,46,0.35);
+    transform: rotate(-4deg);
+  }
+  .note p{ font-family:'Kalam'; font-size: 19px; }
+  .note .sign{ margin-top: 10px; font-size: 13px; color: var(--muted); font-family:'Inter'; }
+
+  h2{
+    font-family:'Kalam'; font-size: 30px; margin-bottom: 22px;
+    color: var(--denim);
+  }
+
+  /* reveal button */
+  .reveal-wrap{ text-align:center; }
+  .reveal-btn{
+    font-family:'Kalam'; font-size: 20px; font-weight: 700;
+    background: var(--denim); color: #fff;
+    border: none; padding: 14px 30px; cursor: pointer;
+    box-shadow: 4px 4px 0 var(--maroon);
+  }
+  .reveal-btn:hover{ background: #2a4258; }
+  .reveal-content{
+    margin-top: 26px; display:none;
+    background: #fffef4; border: 1px dashed var(--maroon);
+    padding: 24px; text-align:left;
+  }
+  .reveal-content.show{ display:block; }
+  .reveal-content p{ font-family:'Kalam'; font-size: 19px; }
+
+  /* list receh */
+  .receh-list{ list-style:none; display:flex; flex-direction:column; gap:14px; }
+  .receh-list li{
+    display:flex; gap:12px; align-items:flex-start;
+    font-size: 15.5px;
+  }
+  .receh-list .mark{ color: var(--maroon); font-family:'Kalam'; font-weight:700; }
+
+  footer{
+    text-align:center; padding: 50px 0 70px; color: var(--muted); font-size: 13px;
+    position:relative; z-index:1;
+  }
+
+  @media (prefers-reduced-motion: reduce){ * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <span class="patch">anak motor · geng kampung inggris</span>
+    <h1>Buat Ritza,<br>BELUM TAPI KUKASI TIPIS</h1>
+    <p>ini bukan kado. tapiekk inih ideku samah ai hehehe</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="countdown-box">
+      <div class="label handwrite">hari ulang tahun muu</div>
+      <div class="countdown-nums" id="countdown">
+        <div class="cnum"><div class="n" id="d">--</div><div class="u">hari</div></div>
+        <div class="cnum"><div class="n" id="h">--</div><div class="u">jam</div></div>
+        <div class="cnum"><div class="n" id="m">--</div><div class="u">menit</div></div>
+        <div class="cnum"><div class="n" id="s">--</div><div class="u">detik</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>NOTEEE</h2>
+    <div class="note-grid">
+      <div class="note">
+        <p>"Kamoe ga bolehh lupa makann, nantii aslam mu naikk"</p>
+        <div class="sign">— TERUD KAU HUEK HUEK</div>
+      </div>
+      <div class="note">
+        <p>"Nda jagokaa pantun tapi.."</p>
+        <div class="sign">— ubur ubur ikan lele, ritza ni le</div>
+      </div>
+      <div class="note">
+        <p>"ON PROGRESS KADOW MU jadih tunggu aja"</p>
+        <div class="sign">— MOHON MENUNGGU</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>alasan kenapa akh sukak kamoe</h2>
+    <ul class="receh-list">
+      <li><span class="mark">01.</span> karena kamoe cantik.</li>
+      <li><span class="mark">02.</span> karena kamoe LUCUKK</li>
+      <li><span class="mark">03.</span> karena kamoe tengil dan jagoehk main caturr</li>
+      <li><span class="mark">04.</span> karena kamoe sangad santiq</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap reveal-wrap">
+    <button class="reveal-btn" onclick="document.getElementById('rev').classList.toggle('show')">BUKAKK</button>
+    <div class="reveal-content" id="rev">
+      <p>Hai Maritsa Nur Afifah, emang belumm ultah mu tapii mauka bilangg, happy birthdayy dan semoga kamoe panjang
+        umur, sehat selalu dann, i hope u doingg goodd all dayy, my SPECIAL GIFT its not gift about object or anything
+        , but ill give u the best i can do, dann i'll love u, i'am dilan from skadah, i'll never forget that things u want
+        like a BELI TANAH DI SWISS, BELI APAR SUDIR, PULAU. happy birthdayy ritzaa, SAYA ORANG PERTAMA UCAPKAN KAW, YUHUYY.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  kaloq kangenn ini duluw bukakk.
+</footer>
+
+<script>
+  // GANTI TANGGAL INI ke tanggal ulang tahun Ritza yang sebenarnya
+  const targetDate = new Date("2026-10-22T00:00:00");
+
+  function updateCountdown(){
+    const now = new Date();
+    const diff = targetDate - now;
+    if (diff <= 0){
+      document.getElementById('countdown').innerHTML =
+        '<div class="cnum"><div class="n">🎉</div><div class="u">hari ini!</div></div>';
+      return;
+    }
+    const d = Math.floor(diff / (1000*60*60*24));
+    const h = Math.floor((diff / (1000*60*60)) % 24);
+    const m = Math.floor((diff / (1000*60)) % 60);
+    const s = Math.floor((diff / 1000) % 60);
+    document.getElementById('d').textContent = d;
+    document.getElementById('h').textContent = String(h).padStart(2,'0');
+    document.getElementById('m').textContent = String(m).padStart(2,'0');
+    document.getElementById('s').textContent = String(s).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
+
+</body>
+</html>
